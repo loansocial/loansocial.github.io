@@ -126,10 +126,10 @@ footer p+p{margin-top:8px}
 
 /* stats bar */
 .stats{background:#fff;border-bottom:1px solid var(--line)}
-.stats .wrap{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;padding-top:30px;padding-bottom:30px}
+.stats .wrap{display:grid;grid-template-columns:repeat(2,1fr);gap:22px 40px;padding-top:30px;padding-bottom:30px}
 @media(min-width:760px){.stats .wrap{grid-template-columns:repeat(4,1fr)}}
-.stats b{display:block;font-family:"Playfair Display",serif;font-size:36px;font-weight:500;line-height:1.1}
-.stats span{font-size:14px;color:var(--muted)}
+.stats b{display:block;font-family:"Playfair Display",serif;font-size:clamp(38px,4.2vw,54px);font-weight:500;line-height:1.05;letter-spacing:-.02em;white-space:nowrap}
+.stats span{font-size:16px;color:var(--muted)}
 
 /* caption proof */
 .proof{display:grid;gap:26px;margin-top:28px;align-items:center}
@@ -190,9 +190,10 @@ nav a.free{color:rgba(250,242,233,.8);font-size:15px;text-decoration:none}
 
 <div class="stats"><div class="wrap">
   <div><b>30</b><span>posts every month</span></div>
-  <div><b>30</b><span>captions, written for you</span></div>
-  <div><b>8</b><span>reel scripts to film</span></div>
+  <div><b>~15 hrs</b><span>of content work saved a month*</span></div>
+  <div><b>10 min</b><span>a week to post</span></div>
   <div><b>$37</b><span>a month, after a 7-day free trial</span></div>
+  <p class="small" style="grid-column:1/-1;font-size:12px">*Our estimate: 30 posts at about 20 minutes each to design, plus 30 captions at about 10 minutes each to write.</p>
 </div></div>
 
 <section id="sample"><div class="wrap">
