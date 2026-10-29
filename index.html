@@ -175,6 +175,22 @@ nav a.free{color:rgba(250,242,233,.8);font-size:15px;text-decoration:none}
 .lead-done h3{font-family:"Playfair Display",serif;font-size:26px;margin-bottom:6px}
 .lead-done .btn{margin-top:12px}
 @media(max-width:700px){.sticky.show{display:block}}
+/* branded pricing (apply_pricing.py) */
+.bill{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px;margin-top:6px}
+.bill button{font:inherit;font-size:15px;font-weight:600;border:0;background:none;color:var(--muted);padding:9px 18px;border-radius:999px;cursor:pointer}
+.bill button.on{background:var(--navy);color:var(--cream)}
+.bill b{color:var(--gold);font-size:12px;margin-left:4px}
+.bill button.on b{color:var(--gold)}
+.plan .price i{font-style:normal}
+.bump{display:flex;gap:10px;align-items:flex-start;background:#fbf3e4;border:1.5px dashed var(--gold);border-radius:14px;padding:12px 14px;margin:-8px 0 18px;font-size:14.5px;cursor:pointer}
+.bump input{margin-top:3px;width:18px;height:18px;accent-color:#b8893f;flex:none}
+.addons{display:grid;gap:18px;margin-top:14px}
+@media(min-width:760px){.addons{grid-template-columns:repeat(3,1fr)}}
+.addons .num small{font-size:16px;color:var(--muted);font-family:Inter,sans-serif}
+.addons .small{margin-top:8px}
+.addlink{display:inline-block;margin-top:12px;font-weight:700;color:var(--navy);text-decoration:none;border-bottom:1.5px solid var(--gold)}
+/* fix carried in with this splice: on phones the caption-proof grid was 560px wide (img width attr) and scrolled sideways */
+@media(max-width:759px){.proof{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
 <body>
@@ -189,8 +205,8 @@ nav a.free{color:rgba(250,242,233,.8);font-size:15px;text-decoration:none}
     <p class="eyebrow">For mortgage loan officers</p>
     <h1>Your mortgage content, <em>already made</em></h1>
     <p class="lead">30 ready-to-post Instagram and Facebook posts every month. Canva templates, captions written in your voice, reel scripts and a posting calendar. Add your NMLS once and post.</p>
-    <a class="btn cta" href="#pricing">Start your 7-day free trial</a>
-    <p class="note">$37/month after the trial. Cancel anytime.</p>
+    <a class="btn" href="#branded">Get 3 free posts in your brand</a>
+    <p class="note">Branded AI, $79/month. Full refund within 7 days if unused. Or <a href="#pricing" style="color:var(--gold)">try Create free for 7 days</a> ($37/month).</p>
   </div>
   <div class="mock">
     <div class="float l"><span class="tagp">CAROUSEL</span><img src="img/d19a.jpg" alt="Carousel cover: Can family help with your down payment?" width="540" height="720"></div>
@@ -259,15 +275,50 @@ nav a.free{color:rgba(250,242,233,.8);font-size:15px;text-decoration:none}
   </div>
 </div></section>
 
+<section id="branded" style="padding-top:0"><div class="wrap">
+  <p class="eyebrow">Branded AI</p>
+  <h2>Made in your brand, not ours</h2>
+  <p class="small">Your logo, colors and headshot on every post, your NMLS and Equal Housing footer filled in, backgrounds made for your city. See 3 posts in your own brand before your month starts.</p>
+  <div class="gallery">
+    <figure><img src="img/brand_d13.jpg" alt="Branded single post with the loan officer's logo, headshot initials and NMLS footer" loading="lazy" width="540" height="675"><figcaption>Single post · your brand</figcaption></figure>
+    <figure><img src="img/brand_d19.jpg" alt="Branded carousel cover in teal and amber" loading="lazy" width="540" height="675"><figcaption>Carousel cover</figcaption></figure>
+    <figure><img src="img/brand_d19b.jpg" alt="Branded carousel slide 2" loading="lazy" width="540" height="675"><figcaption>Carousel · slide 2</figcaption></figure>
+    <figure class="tall"><img src="img/brand_d02.jpg" alt="Branded reel cover" loading="lazy" width="540" height="960"><figcaption>Reel cover</figcaption></figure>
+    <figure><img src="img/brand_d13c.jpg" alt="Co-branded post with the loan officer and a partner agent" loading="lazy" width="540" height="675"><figcaption>Realtor co-branded add-on</figcaption></figure>
+  </div>
+  <p class="small" style="margin-top:4px">Sample brand: a made-up loan officer with placeholder NMLS numbers.</p>
+</div></section>
+
 <section id="pricing"><div class="wrap">
   <p class="eyebrow">Pricing</p>
   <h2>Pick your plan</h2>
+  <div class="bill" role="radiogroup" aria-label="Billing">
+    <button type="button" class="on" data-bill="month" role="radio" aria-checked="true">Monthly</button>
+    <button type="button" data-bill="year" role="radio" aria-checked="false">Yearly <b>2 months free</b></button>
+  </div>
   <div class="plans">
     <div class="plan featured">
-      <span class="badge">7-day free trial</span>
+      <span class="badge">3 free previews in your brand</span>
+      <h3 style="margin-top:14px">Branded AI</h3>
+      <div class="price"><i data-m="$79" data-y="$790">$79</i><span data-m=" / month" data-y=" / year"> / month</span></div>
+      <p class="small" data-m="Everything in Create, made in your brand for you." data-y="$65.83 a month, billed yearly. Two months free.">Everything in Create, made in your brand for you.</p>
+      <ul>
+        <li>About 30 posts a month in your logo, colors and headshot</li>
+        <li>Your NMLS, company NMLS and Equal Housing footer filled in</li>
+        <li>Backgrounds made for your city</li>
+        <li>Captions written in your voice</li>
+        <li>3 free preview posts before your first month</li>
+        <li>Ready to post: no Canva needed</li>
+      </ul>
+      <label class="bump"><input type="checkbox" id="bump"> <span><b>Add the Profile kit, $27 once.</b> Bio options, 6 highlight covers and a headshot backdrop in your colors.</span></label>
+      <a class="btn" id="cta-branded" data-plan="branded" href="#">Get my 3 free previews</a>
+      <p class="small" style="margin-top:10px">Full refund within 7 days if you haven't started your first month. Previews don't count.</p>
+    </div>
+    <div class="plan">
+      <span class="badge soon">7-day free trial</span>
       <h3 style="margin-top:14px">Create</h3>
-      <div class="price">$37<span> / month</span></div>
-      <p class="small">You brand and post. We make the content.</p>
+      <div class="price"><i data-m="$37" data-y="$370">$37</i><span data-m=" / month" data-y=" / year"> / month</span></div>
+      <p class="small" data-m="You brand and post. We make the content." data-y="$30.83 a month, billed yearly. Two months free.">You brand and post. We make the content.</p>
       <ul>
         <li>30 Canva templates every month</li>
         <li>30 captions written in your voice</li>
@@ -276,34 +327,28 @@ nav a.free{color:rgba(250,242,233,.8);font-size:15px;text-decoration:none}
         <li>20 AI prompts for the month's theme</li>
         <li>NMLS and Equal Housing footer on every post</li>
       </ul>
-      <a class="btn cta" data-plan="create" href="https://whop.com/loansocial/loansocial-create/">Start free trial</a>
-      <p class="small" style="margin-top:10px">Cancel anytime from your Whop account.</p>
-    </div>
-    <div class="plan">
-      <span class="badge soon">Coming soon</span>
-      <h3 style="margin-top:14px">Branded AI</h3>
-      <div class="price">$79<span> / month</span></div>
-      <p class="small">Everything in Create, made in your brand for you.</p>
-      <ul>
-        <li>Everything in Create</li>
-        <li>Posts made in your logo, colors and headshot</li>
-        <li>Your NMLS and company details filled in</li>
-        <li>Ready to post the day the month drops</li>
-      </ul>
-      <a class="btn dark cta" data-plan="branded" href="https://whop.com/loansocial/loansocial-branded-ai-waitlist/">Join the waitlist</a>
-      <p class="small" style="margin-top:10px">No charge until it opens.</p>
+      <a class="btn dark" id="cta-create" data-plan="create" href="#">Start free trial</a>
+      <p class="small" style="margin-top:10px">Cancel anytime from your Whop account. Upgrade to Branded AI anytime.</p>
     </div>
   </div>
+
+  <h3 style="margin-top:40px">Add-ons</h3>
+  <div class="addons">
+    <div class="card"><div class="num">+$29<small>/mo</small></div><h3>Realtor co-branded pack</h3><p>Every post also carries your partner agent: name, headshot, brokerage and licence #. Split the cost with them.</p><p class="small">Create or Branded AI</p><a class="addlink" data-plan="cobrand" href="#">Add co-branding</a></div>
+    <div class="card"><div class="num">+$29<small>/mo</small></div><h3>Past-client newsletter</h3><p>One ready-to-send email a month in your brand, for the clients you've already closed. You send it from your own email.</p><p class="small">Branded AI</p><a class="addlink" data-plan="newsletter" href="#">Add the newsletter</a></div>
+    <div class="card"><div class="num">$299<small>/mo</small></div><h3>Team: 5 loan officers</h3><p>One branch brand, a month of posts for each LO with their own name, NMLS and headshot.</p><p class="small">Branded AI for teams</p><a class="addlink" data-plan="team" href="#">Get team seats</a></div>
+  </div>
+
   <div class="cmpwrap"><table class="cmp">
-    <thead><tr><th>Each month</th><th>Create</th><th>Branded AI</th><th>Doing it yourself</th></tr></thead>
+    <thead><tr><th>Each month</th><th>Branded AI</th><th>Create</th><th>Doing it yourself</th></tr></thead>
     <tbody>
-      <tr><td>30 posts designed in Canva</td><td class="y">✓</td><td class="y">✓</td><td class="n">You design</td></tr>
+      <tr><td>30 posts designed</td><td class="y">✓</td><td class="y">✓ in Canva</td><td class="n">You design</td></tr>
       <tr><td>30 captions written</td><td class="y">✓</td><td class="y">✓</td><td class="n">You write</td></tr>
-      <tr><td>8 reel scripts</td><td class="y">✓</td><td class="y">✓</td><td class="n">—</td></tr>
-      <tr><td>30-day posting calendar</td><td class="y">✓</td><td class="y">✓</td><td class="n">—</td></tr>
-      <tr><td>NMLS + Equal Housing footer</td><td class="y">✓</td><td class="y">✓</td><td class="n">You add</td></tr>
-      <tr><td>Your logo, colors, headshot on every post</td><td class="n">You add once</td><td class="y">✓</td><td class="n">You add</td></tr>
-      <tr><td>Price</td><td><b>$37/mo</b></td><td><b>$79/mo</b> (soon)</td><td>Your evenings</td></tr>
+      <tr><td>Your logo, colors, headshot on every post</td><td class="y">✓ done for you</td><td class="n">You add once</td><td class="n">You add</td></tr>
+      <tr><td>NMLS + Equal Housing footer</td><td class="y">✓ filled in</td><td class="y">✓</td><td class="n">You add</td></tr>
+      <tr><td>Backgrounds made for your city</td><td class="y">✓</td><td class="n">—</td><td class="n">—</td></tr>
+      <tr><td>8 reel scripts + 30-day calendar</td><td class="y">✓</td><td class="y">✓</td><td class="n">—</td></tr>
+      <tr><td>Price</td><td><b>$79/mo</b></td><td><b>$37/mo</b></td><td>Your evenings</td></tr>
     </tbody>
   </table></div>
 </div></section>
@@ -338,6 +383,10 @@ nav a.free{color:rgba(250,242,233,.8);font-size:15px;text-decoration:none}
   <details><summary>How are the captions in my voice?</summary><p>When you join, you answer a few questions about how you talk to clients. Captions are written to match, and the AI prompts let you rewrite any of them in seconds.</p></details>
   <details><summary>When does each month arrive?</summary><p>Before the month starts, so you can review it with compliance first.</p></details>
   <details><summary>Can I cancel?</summary><p>Yes, anytime, from your Whop account. If you cancel during the 7-day trial you are not charged.</p></details>
+  <details><summary>What are the 3 free previews?</summary><p>After you join Branded AI and add your logo, colors, headshot and NMLS details, we make 3 real posts in your brand within one business day. They're yours to keep and post. They don't count as using your plan.</p></details>
+  <details><summary>What's the refund policy on Branded AI?</summary><p>Full refund within 7 days of purchase as long as you haven't started your first monthly batch. Previews don't count. Once you approve your previews and start your month, you can still cancel anytime and you won't be billed again.</p></details>
+  <details><summary>How does the Realtor co-branded pack work?</summary><p>Each post also carries your partner agent's name, headshot, brokerage and licence number. Agree with your partner how you'll share the cost, and have your compliance team check co-marketing (RESPA) rules for your company before you post.</p></details>
+  <details><summary>Do you send the newsletter to my clients?</summary><p>No. Each month you get a ready-to-send email in your brand, and you send it from your own email or CRM. Your client list never leaves your hands.</p></details>
 </div></section>
 
 <section class="closing"><div class="wrap">
@@ -385,6 +434,31 @@ window.addEventListener('scroll',function(){
   var r=p.getBoundingClientRect();
   s.classList.toggle('show',window.scrollY>500&&(r.top>window.innerHeight||r.bottom<0));
 },{passive:true});
+</script>
+<script>
+var CHECKOUT={"create_month": "https://whop.com/loansocial/loansocial-create/", "create_year": "https://whop.com/checkout/plan_MexNpYQp44EKR/", "branded_month": "https://whop.com/checkout/plan_yXm9cH7nG8c97/", "branded_year": "https://whop.com/checkout/plan_yzmDgvoQUboJ8/", "branded_month_kit": "https://whop.com/checkout/plan_E3DnxP1Yxvev9/", "branded_year_kit": "https://whop.com/checkout/plan_eQUbofECXIzCe/", "cobrand": "https://whop.com/checkout/plan_uAyDTqqNwTYib/", "newsletter": "https://whop.com/checkout/plan_FquTphD5tUmMX/", "team": "https://whop.com/checkout/plan_szA0N8llEI00v/", "kit": "https://whop.com/checkout/plan_2txn4VhmFFAUQ/", "upgrade": "https://whop.com/checkout/plan_yXm9cH7nG8c97/"};
+(function(){
+  /* checkout URLs come from branded/checkout.json (apply_pricing.py fills CHECKOUT) */
+  var C=CHECKOUT,bill='month';
+  function set(){
+    var y=bill==='year';
+    document.querySelectorAll('#pricing [data-m]').forEach(function(el){el.textContent=el.dataset[y?'y':'m']});
+    var kit=document.getElementById('bump').checked;
+    document.getElementById('cta-branded').href=C['branded_'+bill+(kit?'_kit':'')]||'#';
+    document.getElementById('cta-create').href=C['create_'+bill]||'#';
+    document.getElementById('cta-create').textContent=y?'Start yearly plan':'Start free trial';
+    document.querySelectorAll('#pricing .addlink').forEach(function(a){a.href=C[a.dataset.plan]||'#'});
+  }
+  document.querySelectorAll('.bill button').forEach(function(b){b.addEventListener('click',function(){
+    bill=b.dataset.bill;document.querySelectorAll('.bill button').forEach(function(x){var on=x===b;x.classList.toggle('on',on);x.setAttribute('aria-checked',on)});set();})});
+  document.getElementById('bump').addEventListener('change',set);
+  document.querySelectorAll('#pricing a[data-plan]').forEach(function(a){a.addEventListener('click',function(){
+    if(typeof fbq!=='function'||PIXEL_ID==='PIXEL_ID')return;
+    var v={branded:bill==='year'?790:79,create:bill==='year'?370:37,cobrand:29,newsletter:29,team:299}[a.dataset.plan];
+    if(a.dataset.plan==='branded'&&document.getElementById('bump').checked)v+=27;
+    fbq('track','InitiateCheckout',{content_name:'LoanSocial '+a.dataset.plan+' '+bill,value:v,currency:'USD'});});});
+  set();
+})();
 </script>
 </body>
 </html>

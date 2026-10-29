@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Set up your brand | LoanSocial</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="branded.css">
+</head>
+<body>
+<nav><div class="wrap"><a class="logo" href="/">Loan<em>Social</em></a><span class="who" id="who"></span></div></nav>
+
+<header class="band"><div class="wrap">
+  <p class="eyebrow">Branded AI · Step 1 of 3</p>
+  <h1>Set up your brand once</h1>
+  <p>Five minutes. We use this to make every post in your logo, colors and headshot, with your NMLS footer filled in. Your 3 free preview posts arrive within one business day.</p>
+  <div class="steps"><span class="on">1 · Your brand</span><span>2 · 3 free previews</span><span>3 · Your month</span></div>
+</div></header>
+
+<section id="nolink" hidden><div class="wrap narrow"><div class="card">
+  <h2>Find your setup link</h2>
+  <p class="small">We emailed it right after checkout. Enter the email you used on Whop and we'll send it again.</p>
+  <form id="resend" novalidate>
+    <label for="re">Checkout email</label>
+    <input type="email" id="re" required autocomplete="email">
+    <p style="margin-top:14px"><button class="btn dark" type="submit">Email my link</button></p>
+    <p class="msg" id="remsg" role="status"></p>
+  </form>
+</div></div></section>
+
+<section id="main" hidden><div class="wrap"><div class="grid2" style="align-items:start">
+<form id="f" novalidate>
+  <div class="card"><h3>You</h3>
+    <div class="row">
+      <div><label for="name">Full name, as on your NMLS record</label><input type="text" id="name" name="name" required autocomplete="name"></div>
+      <div><label for="title">Title</label><input type="text" id="title" name="title" value="Loan Officer"></div>
+      <div><label for="nmls">Your NMLS #</label><input type="text" id="nmls" name="nmls" required inputmode="numeric" pattern="[0-9]{3,12}"></div>
+      <div><label for="email">Email clients reply to</label><input type="email" id="email" name="email" required autocomplete="email"></div>
+      <div><label for="phone">Phone <span class="opt">(optional)</span></label><input type="tel" id="phone" name="phone" autocomplete="tel"></div>
+      <div><label for="ig">Instagram handle <span class="opt">(optional)</span></label><input type="text" id="ig" name="instagram" placeholder="@yourname"></div>
+    </div>
+  </div>
+
+  <div class="card"><h3>Your company</h3>
+    <div class="row">
+      <div><label for="company">Company name</label><input type="text" id="company" name="company" required autocomplete="organization"></div>
+      <div><label for="cnmls">Company NMLS #</label><input type="text" id="cnmls" name="company_nmls" required inputmode="numeric" pattern="[0-9]{3,12}"></div>
+      <div><label for="city">City you mostly lend in</label><input type="text" id="city" name="city" required placeholder="Austin"></div>
+      <div><label for="state">State</label><input type="text" id="state" name="state" required placeholder="Texas"></div>
+    </div>
+    <p class="hint">Backgrounds and local posts are made for your city, not ours.</p>
+  </div>
+
+  <div class="card"><h3>Your brand</h3>
+    <label>Logo <span class="opt">(PNG with a transparent background is best)</span></label>
+    <label class="drop" for="logo"><img id="logoprev" alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 20v24M20 32h24' stroke='%23b8893f' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E"><span><b>Upload your logo</b><br><span class="small">PNG, JPG or SVG, up to 5 MB</span></span><input type="file" id="logo" name="logo" accept="image/png,image/jpeg,image/svg+xml"></label>
+    <label>Headshot <span class="opt">(optional: we use your initials until you add one)</span></label>
+    <label class="drop round" for="headshot"><img id="headprev" alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 20v24M20 32h24' stroke='%23b8893f' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E"><span><b>Upload a headshot</b><br><span class="small">Face and shoulders, good light</span></span><input type="file" id="headshot" name="headshot" accept="image/png,image/jpeg"></label>
+    <label>Brand colors</label>
+    <div class="swatches">
+      <div class="sw"><input type="color" id="c1" name="primary" value="#12343b"><span><b>Main</b><br><span class="small" id="c1t">#12343b</span></span></div>
+      <div class="sw"><input type="color" id="c2" name="accent" value="#e0a458"><span><b>Accent</b><br><span class="small" id="c2t">#e0a458</span></span></div>
+    </div>
+    <div class="presets" aria-label="Color presets">
+      <button type="button" data-p="#0e1b33,#d4a660" style="background:#0e1b33" title="Navy and gold"></button>
+      <button type="button" data-p="#12343b,#e0a458" style="background:#12343b" title="Teal and amber"></button>
+      <button type="button" data-p="#3b1f2b,#e8b4a0" style="background:#3b1f2b" title="Plum and blush"></button>
+      <button type="button" data-p="#1f3d2b,#c9b37e" style="background:#1f3d2b" title="Forest and sand"></button>
+      <button type="button" data-p="#22252b,#9fc3e7" style="background:#22252b" title="Charcoal and sky"></button>
+      <button type="button" data-p="#7a1f1f,#f1d9a7" style="background:#7a1f1f" title="Brick and cream"></button>
+    </div>
+    <p class="hint">Any colors work. If one is too light to read on, we deepen it automatically so text stays legible.</p>
+  </div>
+
+  <div class="card"><h3>How you sound</h3>
+    <div class="chips" role="radiogroup" aria-label="Voice">
+      <label><input type="radio" name="voice" value="warm" checked><span>Warm and personal</span></label>
+      <label><input type="radio" name="voice" value="straight"><span>Straight to the point</span></label>
+      <label><input type="radio" name="voice" value="upbeat"><span>Upbeat and energetic</span></label>
+      <label><input type="radio" name="voice" value="expert"><span>Calm expert</span></label>
+    </div>
+    <label for="avoid">Anything to always say or never say <span class="opt">(optional)</span></label>
+    <textarea id="avoid" name="notes" placeholder="e.g. Always mention we lend in Spanish. Never say 'cheap'. My lender doesn't allow emojis."></textarea>
+  </div>
+
+  <div class="card" id="partnerbox" hidden><span class="tag gold">Realtor co-branded pack</span><h3 style="margin-top:10px">Your partner agent</h3>
+    <p class="small">Co-branded posts carry both of you. Agree with your partner how you share the cost and check RESPA rules with your compliance team before posting.</p>
+    <div class="row">
+      <div><label for="pname">Agent name</label><input type="text" id="pname" name="partner_name"></div>
+      <div><label for="ptitle">Title</label><input type="text" id="ptitle" name="partner_title" value="Real Estate Agent"></div>
+      <div><label for="pco">Brokerage</label><input type="text" id="pco" name="partner_company"></div>
+      <div><label for="plic">License #</label><input type="text" id="plic" name="partner_license"></div>
+    </div>
+    <div class="row">
+      <div><label>Agent headshot <span class="opt">(optional)</span></label><label class="drop round" for="phead"><img id="pheadprev" alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 20v24M20 32h24' stroke='%23b8893f' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E"><span class="small">Upload</span><input type="file" id="phead" name="partner_headshot" accept="image/png,image/jpeg"></label></div>
+      <div><label>Brokerage logo <span class="opt">(optional)</span></label><label class="drop" for="plogo"><img id="plogoprev" alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 20v24M20 32h24' stroke='%23b8893f' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E"><span class="small">Upload</span><input type="file" id="plogo" name="partner_logo" accept="image/png,image/jpeg,image/svg+xml"></label></div>
+    </div>
+  </div>
+
+  <div class="card" id="teambox" hidden><span class="tag gold">Team · 5 seats</span><h3 style="margin-top:10px">Your loan officers</h3>
+    <p class="small">One branch brand above, a set of posts for each LO with their own name, NMLS and headshot. You're seat 1; add up to 4 more.</p>
+    <div id="seats"></div>
+  </div>
+
+  <div class="card">
+    <label style="display:flex;gap:10px;font-weight:500;margin:0"><input type="checkbox" id="ok" required style="margin-top:4px"> <span>These NMLS details are correct, and I'll have my compliance team review posts before I publish them.</span></label>
+    <p style="margin-top:18px"><button class="btn dark" type="submit" id="go">Make my 3 free previews</button></p>
+    <p class="msg" id="msg" role="status"></p>
+    <p class="small" style="margin-top:10px">Previews don't count as using your month, so the 7-day refund still applies until you start your first monthly batch.</p>
+  </div>
+</form>
+
+<aside class="sticky-prev">
+  <p class="eyebrow" style="margin-bottom:10px">Live preview</p>
+  <div class="mock" id="mock" style="background-image:url(img/bg_mock.jpg)">
+    <div class="tint" id="mtint"></div>
+    <div class="in">
+      <div class="rule" id="mrule"></div>
+      <div class="h">Their first home</div>
+      <div class="s">A client story</div>
+      <div class="id"><div class="av" id="mav">MT</div><div class="nm"><b id="mname">Your Name</b><span id="mtitle">Loan Officer · NMLS #</span></div><div class="lg" id="mlg" hidden><img id="mlogo" alt=""></div></div>
+      <div class="ft" id="mft">Your Name | NMLS # | Company NMLS # | Equal Housing Opportunity</div>
+    </div>
+  </div>
+  <p class="small" style="margin-top:10px">A rough preview. Your real posts are typeset at full size with a background made for your city.</p>
+</aside>
+</div></div></section>
+
+<footer><div class="wrap"><p>LoanSocial is a marketing content service. It is not a lender and does not give legal or compliance advice. Questions: reply to any LoanSocial email.</p></div></footer>
+
+<script>
+var API='https://api.getloansocial.com/branded';
+var q=new URLSearchParams(location.search),T=q.get('t')||'',DEMO=q.has('demo');
+var $=function(id){return document.getElementById(id)},HEAD=false;
+function show(m){$('main').hidden=false;$('who').textContent=m.email||'';
+  if(m.addons&&m.addons.cobrand)$('partnerbox').hidden=false;
+  if(m.plan==='team'){$('teambox').hidden=false;seats(m.seats||5);}
+  if(m.plan==='create'){document.querySelector('header .eyebrow').textContent='Your add-ons · Step 1 of 2';
+    $('go').textContent='Save my details';}
+  if(m.brand)fill(m.brand);paint();}
+function seats(n){var h='';for(var i=2;i<=n;i++)h+='<div class="row" style="border-top:1px solid #f1e9dc;margin-top:12px;padding-top:4px">'+
+  '<div><label>LO '+i+' name</label><input type="text" name="seat'+i+'_name"></div>'+
+  '<div><label>NMLS #</label><input type="text" name="seat'+i+'_nmls" inputmode="numeric"></div>'+
+  '<div><label>Title</label><input type="text" name="seat'+i+'_title" value="Loan Officer"></div>'+
+  '<div><label>Email</label><input type="email" name="seat'+i+'_email"></div>'+
+  '<div><label>Headshot <span class="opt">(optional)</span></label><input type="file" name="seat'+i+'_headshot" accept="image/png,image/jpeg"></div></div>';$('seats').innerHTML=h;}
+function fill(b){Object.keys(b).forEach(function(k){var el=document.querySelector('[name="'+k+'"]');if(el&&el.type!=='file'&&el.type!=='radio')el.value=b[k];});}
+if(DEMO){show({email:'maya@example.com',plan:q.get('plan')||'branded',addons:{cobrand:q.has('cobrand')},seats:5});}
+else if(!T){$('nolink').hidden=false;}
+else fetch(API+'/member?t='+encodeURIComponent(T)).then(function(r){return r.json()}).then(function(j){
+  if(!j.ok){$('nolink').hidden=false;$('remsg').textContent='That link has expired or is not valid. Get a fresh one below.';$('remsg').className='msg err';return;}
+  if(j.member.status&&j.member.status!=='new'&&!q.has('edit')){location.href='my.html?t='+encodeURIComponent(T);return;}
+  show(j.member);}).catch(function(){$('nolink').hidden=false;});
+
+/* live preview */
+function hex2(h){h=h.replace('#','');return[0,2,4].map(function(i){return parseInt(h.substr(i,2),16)})}
+function lum(c){c=c.map(function(v){v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*c[0]+.7152*c[1]+.0722*c[2]}
+function deep(h){var c=hex2(h),k=1;while(lum(c.map(function(v){return v*k}))>.06&&k>.1)k-=.03;return'rgb('+c.map(function(v){return Math.round(v*k)}).join(',')+')'}
+function ini(n){return(n||'Your Name').split(/\s+/).slice(0,2).map(function(w){return w[0]||''}).join('').toUpperCase()}
+function paint(){var p=$('c1').value,a=$('c2').value,base=deep(p);$('c1t').textContent=p;$('c2t').textContent=a;
+  $('mtint').style.background='linear-gradient(180deg,'+base.replace('rgb','rgba').replace(')',',.55)')+' 0%,'+base.replace('rgb','rgba').replace(')',',.3)')+' 45%,'+base.replace('rgb','rgba').replace(')',',.7)')+' 100%)';
+  $('mrule').style.background=a;var av=$('mav');av.style.borderColor=a;
+  if(!HEAD){av.style.backgroundColor=a;av.style.color=base;av.textContent=ini($('name').value);}
+  var n=$('name').value||'Your Name',nm=$('nmls').value,co=$('company').value||'Company',cn=$('cnmls').value;
+  $('mname').textContent=n;$('mtitle').textContent=($('title').value||'Loan Officer')+' · NMLS #'+nm;
+  $('mft').textContent=n+' | NMLS #'+nm+' | '+co+' NMLS #'+cn+' | Equal Housing Opportunity';}
+['name','title','nmls','company','cnmls','c1','c2'].forEach(function(id){$(id).addEventListener('input',paint)});
+document.querySelectorAll('.presets button').forEach(function(b){b.addEventListener('click',function(){var v=b.dataset.p.split(',');$('c1').value=v[0];$('c2').value=v[1];paint();})});
+function pick(inp,img,cb){$(inp).addEventListener('change',function(){var f=this.files[0];if(!f)return;
+  if(f.size>5e6){alert('Please use a file under 5 MB.');this.value='';return;}
+  var u=URL.createObjectURL(f);$(img).src=u;cb&&cb(u);});}
+pick('logo','logoprev',function(u){$('mlogo').src=u;$('mlg').hidden=false;});
+pick('headshot','headprev',function(u){HEAD=true;var av=$('mav');av.textContent='';av.style.backgroundImage='url('+u+')';av.style.backgroundSize='cover';});
+pick('phead','pheadprev');pick('plogo','plogoprev');
+
+/* submit */
+$('f').addEventListener('submit',function(e){e.preventDefault();var m=$('msg');m.className='msg';
+  var bad=Array.prototype.find.call(this.querySelectorAll('[required]'),function(el){return el.offsetParent!==null&&(el.type==='checkbox'?!el.checked:!el.value.trim()||(el.pattern&&!new RegExp('^'+el.pattern+'$').test(el.value.trim())))});
+  if(bad){m.textContent=bad.type==='checkbox'?'Please confirm the NMLS details.':'Please check: '+(bad.labels[0]?bad.labels[0].textContent:bad.name);m.classList.add('err');bad.focus();return;}
+  if(DEMO){m.textContent='Demo mode: nothing was sent.';m.classList.add('ok');return;}
+  var b=$('go');b.disabled=true;b.textContent='Uploading…';
+  fetch(API+'/onboard?t='+encodeURIComponent(T),{method:'POST',body:new FormData(this)})
+  .then(function(r){return r.json().then(function(j){if(!r.ok||!j.ok)throw new Error(j.error||'failed')})})
+  .then(function(){location.href='my.html?t='+encodeURIComponent(T)})
+  .catch(function(err){b.disabled=false;b.textContent='Make my 3 free previews';m.textContent=err.message==='file_too_big'?'One of the images is over 5 MB.':'Something went wrong. Please try again.';m.classList.add('err');});});
+$('resend').addEventListener('submit',function(e){e.preventDefault();var v=$('re').value.trim(),m=$('remsg');
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){m.textContent='Please enter a valid email.';m.className='msg err';return;}
+  fetch(API+'/resend',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:v})}).finally(function(){
+    m.textContent='If that email bought LoanSocial, your link is on its way. Check spam too.';m.className='msg ok';});});
+paint();
+</script>
+</body>
+</html>

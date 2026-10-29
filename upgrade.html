@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Upgrade to Branded AI | LoanSocial</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="branded.css">
+<style>
+.vs{display:grid;gap:14px;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;margin-top:26px}
+.vs figure img{height:auto;border-radius:14px;box-shadow:0 14px 36px rgba(14,27,51,.2)}
+.vs figcaption{margin-top:10px;font-size:15px}
+.vs figcaption b{display:block;font-family:"Playfair Display",serif;font-size:20px;font-weight:500}
+ul.ticks{list-style:none;margin-top:12px}
+ul.ticks li{padding:8px 0 8px 28px;position:relative;border-bottom:1px solid #f1e9dc}
+ul.ticks li:before{content:"";position:absolute;left:4px;top:15px;width:10px;height:10px;border-radius:50%;background:var(--gold)}
+</style>
+</head>
+<body>
+<nav><div class="wrap"><a class="logo" href="/">Loan<em>Social</em></a></div></nav>
+
+<header class="band"><div class="wrap">
+  <p class="eyebrow">For Create members</p>
+  <h1>Stop branding posts in Canva</h1>
+  <p>Branded AI makes every post in your logo, colors and headshot, with your NMLS footer filled in. You download and post. That's it.</p>
+</div></header>
+
+<section><div class="wrap narrow">
+  <div class="vs">
+    <figure><img src="img/create_d13.jpg" alt="Create: the Canva template before you brand it" width="540" height="720"><figcaption><b>Create · $37</b>The template. You add your name, NMLS, colors and logo in Canva.</figcaption></figure>
+    <figure><img src="img/demo_D13_single_01.jpg" alt="Branded AI: the same post already in the loan officer's brand" width="540" height="675"><figcaption><b>Branded AI · $79</b>The same post, already in your brand. Ready to post.</figcaption></figure>
+  </div>
+
+  <div class="card" style="margin-top:34px">
+    <h2>What changes when you upgrade</h2>
+    <ul class="ticks">
+      <li>Every post arrives in your logo, colors and headshot</li>
+      <li>Your NMLS, company NMLS and Equal Housing footer, filled in</li>
+      <li>Backgrounds made for your city</li>
+      <li>3 free preview posts first, so you see it before your month starts</li>
+      <li>You keep everything in Create: captions, reel scripts, calendar, prompts</li>
+    </ul>
+    <p style="margin-top:22px"><a class="btn dark" id="go" href="#">Upgrade to Branded AI · $79/mo</a></p>
+    <p class="small" style="margin-top:10px">We cancel your Create renewal the day Branded AI starts, so you're never billed for both. Full refund within 7 days if you haven't started your first branded month.</p>
+  </div>
+
+  <div class="card">
+    <h3>Prefer yearly?</h3>
+    <p class="small">$790 a year: two months free.</p>
+    <p style="margin-top:12px"><a class="btn line" id="goy" href="#">Upgrade yearly · $790/yr</a></p>
+  </div>
+</div></section>
+
+<footer><div class="wrap"><p>LoanSocial is a marketing content service. It is not a lender and does not give legal or compliance advice. Sample brand: a made-up loan officer with placeholder NMLS numbers.</p></div></footer>
+<script>
+fetch('https://api.getloansocial.com/branded/offers').then(function(r){return r.json()}).then(function(o){
+  if(o.upgrade)document.getElementById('go').href=o.upgrade;
+  if(o.branded_year)document.getElementById('goy').href=o.branded_year;}).catch(function(){});
+</script>
+</body>
+</html>

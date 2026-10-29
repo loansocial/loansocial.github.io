@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your posts | LoanSocial</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="branded.css">
+</head>
+<body>
+<nav><div class="wrap"><a class="logo" href="/">Loan<em>Social</em></a><span class="who" id="who"></span></div></nav>
+
+<header class="band"><div class="wrap">
+  <p class="eyebrow" id="eb">Branded AI</p>
+  <h1 id="hl">Your posts</h1>
+  <p id="sub"></p>
+  <div class="steps"><span id="s1">1 · Your brand</span><span id="s2">2 · 3 free previews</span><span id="s3">3 · Your month</span></div>
+</div></header>
+
+<section id="bad" hidden><div class="wrap narrow"><div class="card"><h2>This link isn't valid</h2>
+  <p class="small">It may have expired. <a href="start.html">Get a fresh link</a> with your checkout email.</p></div></div></section>
+
+<section id="main" hidden><div class="wrap">
+
+  <div class="card" id="waiting" hidden>
+    <div class="status"><span class="dot"></span><span>We're making your 3 preview posts</span></div>
+    <p class="small" style="margin-top:8px">Within one business day. We'll email you the moment they're ready. Need to fix a detail? <a id="editlink" href="#">Edit your brand</a>.</p>
+  </div>
+
+  <div class="card" id="previews" hidden>
+    <span class="tag gold">Free · doesn't count as use</span>
+    <h2 style="margin-top:10px">Your 3 preview posts</h2>
+    <p class="small">Made in your brand with your NMLS footer. Download them and post them if you like: they're yours either way.</p>
+    <div class="posts" id="pv"></div>
+    <div id="decide" style="margin-top:22px">
+      <p><b>Happy with how they look?</b> We'll make your full month the same way: about 30 posts with captions, ready to post.</p>
+      <p style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn dark" id="yes">Looks good, make my month</button>
+        <button class="btn line" id="no">Request changes</button></p>
+      <div id="confirm" hidden class="card" style="margin-top:14px;background:#fbf3e4">
+        <p><b>Start your first month?</b> Starting it counts as using your plan, so the 7-day refund no longer applies after this.</p>
+        <p style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap"><button class="btn dark" id="yes2">Yes, start my month</button><button class="btn line" id="back">Not yet</button></p>
+      </div>
+      <form id="chg" hidden style="margin-top:14px"><label for="note">What should we change?</label>
+        <textarea id="note" maxlength="1200" placeholder="e.g. Use the white version of my logo, make the accent lighter, my title is Branch Manager."></textarea>
+        <p style="margin-top:10px"><button class="btn dark" type="submit">Send changes</button></p></form>
+      <p class="msg" id="dmsg" role="status"></p>
+    </div>
+  </div>
+
+  <div class="card" id="making" hidden>
+    <div class="status"><span class="dot"></span><span id="makingt">Your month is being made</span></div>
+    <p class="small" style="margin-top:8px">We hand-check every post before it reaches you. We'll email you when it's ready, usually within 2 business days.</p>
+  </div>
+
+  <div class="card" id="month" hidden>
+    <span class="tag">Ready</span>
+    <h2 style="margin-top:10px" id="mlabel">Your month</h2>
+    <p class="small">Posts in your brand, the caption for each, and the posting calendar. Have compliance review the month before you post.</p>
+    <p style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap"><a class="btn dark" id="mzip" href="#">Download all posts (ZIP)</a><a class="btn line" id="mcap" href="#">Captions + calendar (PDF)</a></p>
+    <div class="posts" id="mposts"></div>
+  </div>
+
+  <div class="card" id="extras" hidden>
+    <h3>Your add-ons</h3>
+    <div id="extraslist"></div>
+  </div>
+
+  <div class="card" id="more">
+    <h3>Add to your plan</h3>
+    <div id="morelist"></div>
+  </div>
+
+  <p class="small" style="margin-top:22px" id="refund">Full refund within 7 days of purchase as long as you haven't started your first monthly batch. Preview posts don't count. Cancel anytime from your Whop account.</p>
+</div></section>
+
+<footer><div class="wrap"><p>LoanSocial is a marketing content service. It is not a lender and does not give legal or compliance advice.</p></div></footer>
+
+<script>
+var API='https://api.getloansocial.com/branded';
+/* Offer copy only; checkout URLs come from the worker (OFFER_URLS in wrangler.toml), so they live in one place. */
+var OFFERS={
+  cobrand:{t:'Realtor co-branded pack',d:'Every post also carries your partner agent: their name, headshot, brokerage and licence #.',p:'+$29/mo'},
+  newsletter:{t:'Past-client newsletter',d:'One ready-to-send email a month in your brand, for your past clients. You send it from your own email.',p:'+$29/mo',branded:true},
+  kit:{t:'Profile kit',d:'Instagram bio options, 6 highlight covers and a headshot backdrop, all in your colors.',p:'$27 once'},
+  annual:{t:'Switch to yearly',d:'Two months free: $790 a year instead of $948.',p:'$790/yr'},
+  team:{t:'Team: 5 loan officers',d:'One branch brand, a month of posts for each LO with their own NMLS and headshot.',p:'$299/mo',branded:true}};
+var q=new URLSearchParams(location.search),T=q.get('t')||'',$=function(id){return document.getElementById(id)};
+function api(path,body){return fetch(API+path+'?t='+encodeURIComponent(T),body?{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}:{}).then(function(r){return r.json()})}
+function posts(el,list){el.innerHTML=list.map(function(p){return'<figure><a href="'+p.url+'" download><img src="'+p.url+'" alt="'+(p.label||'Post')+'" loading="lazy"></a><figcaption>'+(p.label||'')+'</figcaption></figure>'}).join('')}
+function render(m){
+  $('main').hidden=false;$('who').textContent=m.email||'';$('editlink').href='start.html?edit=1&t='+encodeURIComponent(T);
+  var st=m.status,on=function(id){$(id).classList.add('on')};on('s1');
+  if(st==='onboarded'||st==='changes'){$('waiting').hidden=false;$('hl').textContent='Thanks, '+(m.first||'')+'. Previews are on the way';
+    if(st==='changes')$('waiting').querySelector('.status span:last-child').textContent='We got your changes. New previews are on the way';}
+  if(st==='previews'){on('s2');$('previews').hidden=false;$('hl').textContent='Your previews are ready';posts($('pv'),m.previews||[]);}
+  if(st==='batch'){on('s2');on('s3');$('making').hidden=false;$('hl').textContent='Your month is being made';}
+  if(st==='ready'){on('s2');on('s3');$('month').hidden=false;$('hl').textContent='Your month is ready';
+    $('mlabel').textContent=m.month.label;$('mzip').href=m.month.zip;$('mcap').href=m.month.captions;posts($('mposts'),m.month.posts||[]);
+    if(m.previews&&m.previews.length){$('previews').hidden=false;$('decide').hidden=true;posts($('pv'),m.previews);}}
+  if(m.used)$('refund').textContent='Cancel anytime from your Whop account.';
+  var ex=m.downloads||[];if(ex.length){$('extras').hidden=false;$('extraslist').innerHTML=ex.map(function(x){
+    return'<div class="addon"><div><b>'+x.title+'</b><p class="small">'+(x.note||'')+'</p></div><a class="btn line" href="'+x.url+'">Download</a></div>'}).join('')}
+  var own=m.addons||{},more=Object.keys(OFFERS).filter(function(k){
+    if(k==='annual')return m.interval!=='year'&&m.plan==='branded';if(k==='team')return m.plan==='branded';
+    return!own[k]&&(!OFFERS[k].branded||m.plan!=='create')});
+  var urls=m.offer_urls||{};more=more.filter(function(k){return urls[k]});
+  if(!more.length)$('more').hidden=true;
+  $('morelist').innerHTML=more.map(function(k){var o=OFFERS[k];return'<div class="addon"><div><b>'+o.t+'</b><p class="small">'+o.d+'</p></div><div style="text-align:right"><div class="price">'+o.p+'</div><a class="btn line" style="margin-top:6px;padding:10px 18px;font-size:15px" href="'+urls[k]+'">Add</a></div></div>'}).join('');}
+if(q.has('demo')){var D='img/demo_';render({email:'maya@example.com',first:'Maya',status:q.get('demo')||'previews',plan:'branded',interval:'month',addons:{kit:true},
+  previews:[{url:D+'D13_single_01.jpg',label:'Single post'},{url:D+'D19_carousel_01.jpg',label:'Carousel cover'},{url:D+'D02_reel_01.jpg',label:'Reel cover'}],
+  month:{label:'December 2026',zip:'#',captions:'#',posts:[{url:D+'D13_single_01.jpg',label:'Dec 13'},{url:D+'D16_single_01.jpg',label:'Dec 16'},{url:D+'D19_carousel_01.jpg',label:'Dec 19'},{url:D+'D19_carousel_02.jpg',label:'Dec 19 · 2'}]},
+  offer_urls:{cobrand:'#',newsletter:'#',annual:'#',team:'#'},downloads:[{title:'Profile kit',note:'Bio options, 6 highlight covers, headshot backdrop',url:'#'}]});}
+else if(!T)$('bad').hidden=false;
+else api('/member').then(function(j){if(!j.ok){$('bad').hidden=false;return}if(j.member.status==='new'){location.href='start.html?t='+encodeURIComponent(T);return}render(j.member)}).catch(function(){$('bad').hidden=false});
+$('yes').onclick=function(){$('confirm').hidden=false;$('chg').hidden=true};
+$('back').onclick=function(){$('confirm').hidden=true};
+$('no').onclick=function(){$('chg').hidden=false;$('confirm').hidden=true;$('note').focus()};
+$('yes2').onclick=function(){var b=this;b.disabled=true;if(q.has('demo')){$('dmsg').textContent='Demo mode: nothing was sent.';return}
+  api('/approve',{}).then(function(j){if(!j.ok)throw 0;location.reload()}).catch(function(){b.disabled=false;$('dmsg').textContent='Something went wrong. Please try again.';$('dmsg').className='msg err'})};
+$('chg').onsubmit=function(e){e.preventDefault();var n=$('note').value.trim();if(n.length<4){$('note').focus();return}
+  if(q.has('demo')){$('dmsg').textContent='Demo mode: nothing was sent.';return}
+  api('/changes',{note:n}).then(function(j){if(!j.ok)throw 0;location.reload()}).catch(function(){$('dmsg').textContent='Something went wrong. Please try again.';$('dmsg').className='msg err'})};
+</script>
+</body>
+</html>

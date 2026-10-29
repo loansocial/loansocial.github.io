@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>You're in | LoanSocial</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="branded.css">
+</head>
+<body>
+<nav><div class="wrap"><a class="logo" href="/">Loan<em>Social</em></a></div></nav>
+<header class="band"><div class="wrap">
+  <p class="eyebrow">Payment received</p>
+  <h1>You're in. Check your email.</h1>
+  <p>We've sent your private setup link to the email you used at checkout. It takes about five minutes, then we make your 3 free preview posts.</p>
+</div></header>
+<section><div class="wrap narrow">
+  <div class="card">
+    <h3>What happens next</h3>
+    <ol style="padding-left:20px;margin-top:8px;line-height:1.9">
+      <li>Open the email from LoanSocial and tap <b>Set up my brand</b></li>
+      <li>Add your logo, colors, headshot and NMLS details</li>
+      <li>Your 3 preview posts arrive within one business day</li>
+      <li>Happy with them? Start your month with one click</li>
+    </ol>
+  </div>
+  <div class="card">
+    <h3>No email after 5 minutes?</h3>
+    <p class="small">Check spam and Promotions, or send it again.</p>
+    <form id="resend" novalidate style="margin-top:10px">
+      <input type="email" id="re" placeholder="Checkout email" required autocomplete="email">
+      <p style="margin-top:12px"><button class="btn dark" type="submit">Send my link again</button></p>
+      <p class="msg" id="remsg" role="status"></p>
+    </form>
+  </div>
+</div></section>
+<footer><div class="wrap"><p>LoanSocial is a marketing content service. It is not a lender and does not give legal or compliance advice.</p></div></footer>
+<script>
+document.getElementById('resend').addEventListener('submit',function(e){e.preventDefault();var v=document.getElementById('re').value.trim(),m=document.getElementById('remsg');
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){m.textContent='Please enter a valid email.';m.className='msg err';return;}
+  fetch('https://api.getloansocial.com/branded/resend',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:v})}).finally(function(){
+    m.textContent='If that email bought LoanSocial, your link is on its way.';m.className='msg ok';});});
+</script>
+</body>
+</html>
