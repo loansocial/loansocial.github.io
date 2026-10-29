@@ -162,6 +162,17 @@ nav a.free{color:rgba(250,242,233,.8);font-size:15px;text-decoration:none}
 
 .sticky{position:fixed;left:12px;right:12px;bottom:12px;display:none;z-index:9}
 .sticky .btn{display:block;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.lf{display:grid;gap:10px;min-width:300px;max-width:380px;width:100%}
+.lf input{font:inherit;font-size:16px;padding:14px 18px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink)}
+.lf input:focus{outline:2px solid var(--gold);outline-offset:1px}
+.lf .btn{border:0;cursor:pointer;font-family:inherit}
+.lf .btn[disabled]{opacity:.6;cursor:wait}
+.lf .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.lead-msg{margin:2px 0 0;text-align:center}
+.lead-msg.err{color:#b3261e}
+.lead-done{max-width:380px}
+.lead-done h3{font-family:"Playfair Display",serif;font-size:26px;margin-bottom:6px}
+.lead-done .btn{margin-top:12px}
 @media(max-width:700px){.sticky.show{display:block}}
 </style>
 </head>
@@ -303,7 +314,18 @@ nav a.free{color:rgba(250,242,233,.8);font-size:15px;text-decoration:none}
       <h2 style="margin-bottom:8px">Take 7 December posts free</h2>
       <p class="small">Seven finished Canva posts with their captions, from this month's drop. No card needed.</p>
     </div>
-    <a class="btn dark cta" data-plan="free" href="https://whop.com/loansocial/7-free-december-posts/">Get the 7 free posts</a>
+    <form class="lf" id="leadform" novalidate>
+      <input type="text" name="firstName" placeholder="First name" autocomplete="given-name" aria-label="First name">
+      <input type="email" name="email" placeholder="Work email" autocomplete="email" aria-label="Email" required>
+      <input type="text" name="company" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true">
+      <button class="btn dark" type="submit">Email me the 7 posts</button>
+      <p class="small lead-msg" id="leadmsg" role="status">We'll email the download link. Unsubscribe anytime.</p>
+    </form>
+    <div class="lead-done" id="leaddone" hidden>
+      <h3>Check your inbox</h3>
+      <p class="small">The download link is on its way. Want it right now?</p>
+      <a class="btn dark" href="https://loansocial.github.io/dl/44965ffe6947/LoanSocial_7_Free_Posts.zip">Download the 7 posts (ZIP)</a>
+    </div>
   </div>
 </div></section>
 
@@ -340,6 +362,23 @@ document.querySelectorAll('a.cta[data-plan]').forEach(function(a){
     else{fbq('track','Lead',{content_name:a.dataset.plan==='free'?'LoanSocial 7 free posts':'LoanSocial Branded AI waitlist'});}
   });
 });
+(function(){
+  var f=document.getElementById('leadform'),m=document.getElementById('leadmsg'),d=document.getElementById('leaddone');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var email=f.email.value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){m.textContent='Please enter a valid email.';m.classList.add('err');f.email.focus();return;}
+    var b=f.querySelector('button');b.disabled=true;b.textContent='Sending…';m.classList.remove('err');
+    fetch('https://api.getloansocial.com/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email:email,firstName:f.firstName.value.trim(),company:f.company.value})})
+    .then(function(r){return r.json().then(function(j){if(!r.ok||!j.ok)throw new Error(j.error||'failed');});})
+    .then(function(){
+      f.hidden=true;d.hidden=false;
+      if(typeof fbq==='function'&&PIXEL_ID!=='PIXEL_ID')fbq('track','Lead',{content_name:'LoanSocial 7 free posts'});
+    })
+    .catch(function(){b.disabled=false;b.textContent='Email me the 7 posts';m.textContent='Something went wrong. Please try again.';m.classList.add('err');});
+  });
+})();
 var s=document.getElementById('sticky'),p=document.getElementById('pricing');
 window.addEventListener('scroll',function(){
   var r=p.getBoundingClientRect();
