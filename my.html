@@ -107,7 +107,7 @@ function render(m){
   var own=m.addons||{},more=Object.keys(OFFERS).filter(function(k){
     if(k==='annual')return m.interval!=='year'&&m.plan==='branded';if(k==='team')return m.plan==='branded';
     return!own[k]&&(!OFFERS[k].branded||m.plan!=='create')});
-  var urls=m.offer_urls||{};more=more.filter(function(k){return urls[k]});
+  var urls=m.offer_urls||{};urls.annual=urls.annual||urls.branded_year;  /* checkout.json names it branded_year */more=more.filter(function(k){return urls[k]});
   if(!more.length)$('more').hidden=true;
   $('morelist').innerHTML=more.map(function(k){var o=OFFERS[k];return'<div class="addon"><div><b>'+o.t+'</b><p class="small">'+o.d+'</p></div><div style="text-align:right"><div class="price">'+o.p+'</div><a class="btn line" style="margin-top:6px;padding:10px 18px;font-size:15px" href="'+urls[k]+'">Add</a></div></div>'}).join('');}
 if(q.has('demo')){var D='img/demo_';render({email:'maya@example.com',first:'Maya',status:q.get('demo')||'previews',plan:'branded',interval:'month',addons:{kit:true},
@@ -125,5 +125,6 @@ $('chg').onsubmit=function(e){e.preventDefault();var n=$('note').value.trim();if
   if(q.has('demo')){$('dmsg').textContent='Demo mode: nothing was sent.';return}
   api('/changes',{note:n}).then(function(j){if(!j.ok)throw 0;location.reload()}).catch(function(){$('dmsg').textContent='Something went wrong. Please try again.';$('dmsg').className='msg err'})};
 </script>
+<script src="checkout.js" defer></script>
 </body>
 </html>
