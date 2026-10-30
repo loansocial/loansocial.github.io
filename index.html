@@ -182,8 +182,21 @@ nav a.free{color:rgba(250,242,233,.8);font-size:15px;text-decoration:none}
 .bill b{color:var(--gold);font-size:12px;margin-left:4px}
 .bill button.on b{color:var(--gold)}
 .plan .price i{font-style:normal}
-.bump{display:flex;gap:10px;align-items:flex-start;background:#fbf3e4;border:1.5px dashed var(--gold);border-radius:14px;padding:12px 14px;margin:-8px 0 18px;font-size:14.5px;cursor:pointer}
-.bump input{margin-top:3px;width:18px;height:18px;accent-color:#b8893f;flex:none}
+.bump{background:#fbf3e4;border:1.5px dashed var(--gold);border-radius:16px;padding:16px;margin:-8px 0 18px;display:grid;gap:12px}
+.bump:has(input:checked){border-style:solid;background:#f7ead2}
+.bump-head{display:flex;gap:12px;align-items:flex-start;font-size:17px;cursor:pointer;line-height:1.35}
+.bump-head input{margin-top:3px;width:22px;height:22px;accent-color:#b8893f;flex:none;cursor:pointer}
+.bump-head em{font-style:normal;font-weight:700;color:#8a6424;white-space:nowrap}
+.bump-sub{font-size:14.5px;color:var(--muted)}
+.ig{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;display:grid;gap:10px}
+.ig-top{display:flex;gap:10px;align-items:flex-start}
+.ig-top i{flex:none;width:44px;height:44px;border-radius:50%;background:#e0a458;color:#12343b;font:500 17px/44px "Playfair Display",serif;text-align:center;font-style:normal}
+.ig-top b{font-size:13.5px;display:block}
+.ig-top p{font-size:12.5px;color:var(--muted);line-height:1.4;margin-top:2px}
+.ig img{width:100%;height:auto;border-radius:8px}
+.plan ul.kit{list-style:none;display:grid;gap:6px;font-size:14.5px;margin:0;flex:none}
+.plan ul.kit li{padding:0 0 0 22px;border:0;position:relative;font-size:14.5px}
+.plan ul.kit li:before{content:"✓";position:absolute;left:2px;top:0;width:auto;height:auto;background:none;border-radius:0;color:#1f7a4d;font-weight:700}
 .addons{display:grid;gap:18px;margin-top:14px}
 @media(min-width:760px){.addons{grid-template-columns:repeat(3,1fr)}}
 .addons .num small{font-size:16px;color:var(--muted);font-family:Inter,sans-serif}
@@ -309,8 +322,20 @@ nav a.free{color:rgba(250,242,233,.8);font-size:15px;text-decoration:none}
         <li>Captions written in your voice</li>
         <li>3 free preview posts before your first month</li>
         <li>Ready to post: no Canva needed</li>
+        <li>Each month ready by the 25th of the month before</li>
       </ul>
-      <label class="bump"><input type="checkbox" id="bump"> <span><b>Add the Profile kit, $27 once.</b> Bio options, 6 highlight covers and a headshot backdrop in your colors.</span></label>
+      <div class="bump">
+        <label class="bump-head" for="bump"><input type="checkbox" id="bump"><span><b>Add the Profile kit</b> <em>+$27 once</em><br><span class="bump-sub">Make your Instagram profile match your new posts.</span></span></label>
+        <div class="ig" aria-hidden="true">
+          <div class="ig-top"><i>MT</i><div><b>Maya Torres | Senior Loan Officer</b><p>Your Denver mortgage guide | First-time buyers, move-up buyers, refinances | NMLS #000000</p></div></div>
+          <img src="img/kit_highlights.jpg" alt="" width="1340" height="200">
+        </div>
+        <ul class="kit">
+          <li><b>5 Instagram bio options</b>, written for you, NMLS included</li>
+          <li><b>6 story highlight covers</b> in your colors</li>
+          <li><b>Headshot backdrop</b> in your brand color</li>
+        </ul>
+      </div>
       <a class="btn" id="cta-branded" data-plan="branded" href="#">Get my 3 free previews</a>
       <p class="small" style="margin-top:10px">Full refund within 7 days if you haven't started your first month. Previews don't count.</p>
     </div>
@@ -326,6 +351,7 @@ nav a.free{color:rgba(250,242,233,.8);font-size:15px;text-decoration:none}
         <li>30-day posting calendar</li>
         <li>20 AI prompts for the month's theme</li>
         <li>NMLS and Equal Housing footer on every post</li>
+        <li>Each month ready by the 25th of the month before</li>
       </ul>
       <a class="btn dark" id="cta-create" data-plan="create" href="#">Start free trial</a>
       <p class="small" style="margin-top:10px">Cancel anytime from your Whop account. Upgrade to Branded AI anytime.</p>
@@ -381,7 +407,7 @@ nav a.free{color:rgba(250,242,233,.8);font-size:15px;text-decoration:none}
   <details><summary>Do I need Canva Pro?</summary><p>No. The templates open in free Canva. Pro makes branding faster because you can apply your brand kit to every post at once.</p></details>
   <details><summary>Is the content compliant?</summary><p>Every post carries an NMLS and Equal Housing Opportunity footer, and the copy avoids rate promises and advertising trigger terms. Rules differ by lender and state, so your compliance team should still review before you post. LoanSocial does not replace them.</p></details>
   <details><summary>How are the captions in my voice?</summary><p>When you join, you answer a few questions about how you talk to clients. Captions are written to match, and the AI prompts let you rewrite any of them in seconds.</p></details>
-  <details><summary>When does each month arrive?</summary><p>Before the month starts, so you can review it with compliance first.</p></details>
+  <details><summary>When does each month arrive?</summary><p>By the 25th of the month before, so you have time to review it with compliance before the 1st. Create members get December's posts now; January's land by 25 December. On Branded AI your 3 previews arrive within one business day of setup and your first month within 2 business days of approving them; after that, every month by the 25th.</p></details>
   <details><summary>Can I cancel?</summary><p>Yes, anytime, from your Whop account. If you cancel during the 7-day trial you are not charged.</p></details>
   <details><summary>What are the 3 free previews?</summary><p>After you join Branded AI and add your logo, colors, headshot and NMLS details, we make 3 real posts in your brand within one business day. They're yours to keep and post. They don't count as using your plan.</p></details>
   <details><summary>What's the refund policy on Branded AI?</summary><p>Full refund within 7 days of purchase as long as you haven't started your first monthly batch. Previews don't count. Once you approve your previews and start your month, you can still cancel anytime and you won't be billed again.</p></details>
