@@ -25,9 +25,9 @@
     plan_FquTphD5tUmMX:{v:29,name:'Past-client newsletter',addon:true},
     plan_2txn4VhmFFAUQ:{v:27,name:'Profile kit',addon:true}};
   var ADDONS=[ /* benefit lines: branded/fragments/pricing.html */
-    {k:'cobrand',plan:'plan_uAyDTqqNwTYib',name:'Realtor co-branded pack',v:29,tiers:['create','branded'],line:'Your partner agent on every post too. Split the cost with them.'},
-    {k:'newsletter',plan:'plan_FquTphD5tUmMX',name:'Past-client newsletter',v:29,tiers:['branded'],line:'One ready-to-send email a month for clients you’ve already closed.'},
-    {k:'kit',plan:'plan_2txn4VhmFFAUQ',name:'Profile kit',v:27,once:true,tiers:['branded'],line:'Make your Instagram profile match your new posts.'}];
+    {k:'cobrand',why:'Give your referral partners posts they\u2019ll want to share, so you\u2019re in front of their buyers too.',plan:'plan_uAyDTqqNwTYib',name:'Realtor co-branded pack',v:29,tiers:['create','branded'],line:'Your partner agent on every post too. Split the cost with them.'},
+    {k:'newsletter',why:'Your next deal is often a past client\u2019s refi or referral. Stay in their inbox.',plan:'plan_FquTphD5tUmMX',name:'Past-client newsletter',v:29,tiers:['branded'],line:'One ready-to-send email a month for clients you’ve already closed.'},
+    {k:'kit',why:'Referrals check your profile before they call. Make it look the part.',plan:'plan_2txn4VhmFFAUQ',name:'Profile kit',v:27,once:true,tiers:['branded'],line:'Make your Instagram profile match your new posts.'}];
   var PLANLINE={branded:'About 30 posts a month in your logo, colors and headshot, NMLS footer filled in. 3 free previews first.',
     create:'30 Canva templates, captions and reel scripts every month. You brand and post.'};
   var RX=/whop\.com\/checkout\/(plan_[A-Za-z0-9]{6,30})/;
@@ -40,7 +40,7 @@
     '.lsco-add{display:flex;gap:12px;align-items:flex-start;border:1px solid #e7dccb;border-radius:14px;padding:12px 14px;cursor:pointer;transition:border-color .15s,background .15s}'+
     '.lsco-add[hidden]{display:none}.lsco-add:has(input:checked){border-color:#0e1b33;background:#f7f8fb}.lsco-add input{margin-top:3px;width:18px;height:18px;accent-color:#0e1b33;flex:none}'+
     '.lsco-add span{display:grid;gap:2px;font-size:14px}.lsco-add small{color:#5d6678;font-size:13px}.lsco-add em{font-style:normal;color:#0e1b33;font-weight:600;margin-left:auto;white-space:nowrap;font-size:14px}'+
-    '.lsco-bar{position:sticky;bottom:-18px;margin:0 -18px -18px;padding:0 18px 18px;background:#fff;display:grid;gap:12px;box-shadow:0 -14px 18px -12px rgba(0,0,0,.12);z-index:1}.lsco-tot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-top:1px solid #e7dccb;padding-top:12px;font-size:14px}.lsco-tot b{font-size:20px;color:#0e1b33}.lsco-tot small{display:block;color:#5d6678;font-size:12px;text-align:right}'+
+    '.lsco-bar{position:sticky;bottom:-18px;margin:0 -18px -18px;padding:0 18px 18px;background:#fff;display:grid;gap:12px;box-shadow:0 -14px 18px -12px rgba(0,0,0,.12);z-index:1}.lsco-why{display:block;font-style:normal;font-size:14px;line-height:1.4;color:#1d2433;margin:2px 0}.lsco-tot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-top:1px solid #e7dccb;padding-top:12px;font-size:14px}.lsco-tot b{font-size:20px;color:#0e1b33}.lsco-tot small{display:block;color:#5d6678;font-size:12px;text-align:right}'+
     '.lsco-go{background:#0e1b33;color:#fff;border:0;border-radius:999px;padding:15px 18px;font:600 16px Inter,system-ui,sans-serif;cursor:pointer;width:100%}'+
     '.lsco-back{background:none;border:0;color:#b07a2a;font:500 14px Inter,system-ui,sans-serif;cursor:pointer;justify-self:start;padding:0}.lsco-back[hidden]{display:none}'+
     '.lsco-step{display:grid;gap:12px}.lsco-step[hidden]{display:none}'+
@@ -48,7 +48,7 @@
     '.lsco-foot{font-size:12px;color:#5d6678;text-align:center;margin:0}.lsco-foot[hidden]{display:none}.lsco-done{text-align:center;padding:10px 4px}.lsco-done h3{font-family:"Playfair Display",serif;font-size:24px;margin:0 0 6px;color:#0e1b33}'+
     '.lsco-done p{color:#5d6678;margin:0 0 14px}html.lsco-open,html.lsco-open body{overflow:hidden}';
   var st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
-  var adds=ADDONS.map(function(a){return '<label class="lsco-add" data-k="'+a.k+'"><input type="checkbox" value="'+a.k+'"><span><b>'+a.name+'</b><small>'+a.line+'</small></span><em>+$'+a.v+(a.once?' once':'/mo')+'</em></label>'}).join('');
+  var adds=ADDONS.map(function(a){return '<label class="lsco-add" data-k="'+a.k+'"><input type="checkbox" value="'+a.k+'"><span><b>'+a.name+'</b>'+(a.why?'<i class="lsco-why">'+a.why+'</i>':'')+'<small>'+a.line+'</small></span><em>+$'+a.v+(a.once?' once':'/mo')+'</em></label>'}).join('');
   var co=document.createElement('div');co.className='lsco';co.hidden=true;co.setAttribute('role','dialog');co.setAttribute('aria-modal','true');co.setAttribute('aria-label','Checkout');
   co.innerHTML='<div class="lsco-box"><div class="lsco-top"><b id="lsco-t">Your plan</b><button class="lsco-x" type="button" aria-label="Close checkout">×</button></div>'+
     '<div class="lsco-step" id="lsco-s1"><div class="lsco-plan"><h4 id="lsco-pn"></h4><p class="lsco-deal" id="lsco-deal"></p><p id="lsco-pl"></p></div>'+
