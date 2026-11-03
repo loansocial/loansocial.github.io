@@ -28,7 +28,7 @@
     {k:'cobrand',why:'Give your referral partners posts they\u2019ll want to share, so you\u2019re in front of their buyers too.',plan:'plan_uAyDTqqNwTYib',name:'Realtor co-branded pack',v:29,tiers:['create','branded'],line:'Your partner agent on every post too. Split the cost with them.'},
     {k:'newsletter',why:'Your next deal is often a past client\u2019s refi or referral. Stay in their inbox.',plan:'plan_FquTphD5tUmMX',name:'Past-client newsletter',v:29,tiers:['branded'],line:'One ready-to-send email a month for clients you’ve already closed.'},
     {k:'kit',why:'Referrals check your profile before they call. Make it look the part.',plan:'plan_2txn4VhmFFAUQ',name:'Profile kit',v:27,once:true,tiers:['branded'],line:'Make your Instagram profile match your new posts.'}];
-  var PLANLINE={branded:'About 30 posts a month in your logo, colors and headshot, NMLS footer filled in. 3 free previews first.',
+  var PLANLINE={branded:'30 posts a month in your logo, colors and headshot, NMLS footer filled in. 3 free previews first.',
     create:'30 Canva templates, captions and reel scripts every month. You brand and post.'};
   var RX=/whop\.com\/checkout\/(plan_[A-Za-z0-9]{6,30})/;
   var css='.lsco{position:fixed;inset:0;z-index:200;background:rgba(9,16,32,.72);display:grid;place-items:center;padding:16px}'+
