@@ -74,10 +74,10 @@
     <div id="morelist"></div>
   </div>
 
-  <p class="small" style="margin-top:22px" id="refund">Full refund within 7 days of purchase as long as you haven't started your first monthly batch. Preview posts don't count. Cancel anytime from your Whop account.</p>
+  <p class="small" style="margin-top:22px" id="refund">Full refund within 7 days of purchase as long as you haven't started your first monthly batch. Preview posts don't count. <a href="cancel.html">Cancel anytime</a>.</p>
 </div></section>
 
-<footer><div class="wrap"><p>LoanSocial is a marketing content service. It is not a lender and does not give legal or compliance advice.</p></div></footer>
+<footer><div class="wrap"><p>LoanSocial is a marketing content service. It is not a lender and does not give legal or compliance advice.</p><p style="margin-top:8px"><a href="privacy.html" style="color:rgba(250,242,233,.85)">Privacy</a> · <a href="terms.html" style="color:rgba(250,242,233,.85)">Terms</a> · <a href="refund.html" style="color:rgba(250,242,233,.85)">Refunds</a> · <a href="cancel.html" style="color:rgba(250,242,233,.85)">Cancel anytime</a></p></div></footer>
 
 <script>
 var API='https://api.getloansocial.com/branded';
@@ -101,7 +101,7 @@ function render(m){
   if(st==='ready'){on('s2');on('s3');$('month').hidden=false;$('hl').textContent='Your month is ready';
     $('mlabel').textContent=m.month.label;$('mzip').href=m.month.zip;$('mcap').href=m.month.captions;posts($('mposts'),m.month.posts||[]);
     if(m.previews&&m.previews.length){$('previews').hidden=false;$('decide').hidden=true;posts($('pv'),m.previews);}}
-  if(m.used)$('refund').textContent='Cancel anytime from your Whop account.';
+  if(m.used)$('refund').innerHTML='<a href="cancel.html">Cancel anytime</a>.';
   var ex=m.downloads||[];if(ex.length){$('extras').hidden=false;$('extraslist').innerHTML=ex.map(function(x){
     return'<div class="addon"><div><b>'+x.title+'</b><p class="small">'+(x.note||'')+'</p></div><a class="btn line" href="'+x.url+'">Download</a></div>'}).join('')}
   var own=m.addons||{},more=Object.keys(OFFERS).filter(function(k){

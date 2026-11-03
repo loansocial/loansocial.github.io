@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manage or cancel your plan | LoanSocial</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="branded.css">
+<style>
+.plan{display:flex;gap:12px;align-items:flex-start;border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;margin:0 0 10px;background:#fffdf9;font-weight:400;cursor:pointer}
+.plan input{margin-top:4px;width:18px;height:18px;accent-color:var(--navy);flex:none}
+.plan span{display:grid;gap:2px}.plan small{color:var(--muted);font-size:13.5px}
+.plan em{font-style:normal;margin-left:auto;font-weight:700;white-space:nowrap}
+.plan .btn{margin-left:auto;padding:8px 16px;font-size:14px}
+.plan.off{cursor:default;background:#f6f1e8}
+#code{letter-spacing:8px;font-size:24px;max-width:220px}
+.card .btn{margin-top:18px}
+a{color:var(--navy)}footer a{color:rgba(250,242,233,.85)}
+</style>
+</head>
+<body>
+<nav><div class="wrap"><a class="logo" href="./">Loan<em>Social</em></a><span class="who" id="who"></span></div></nav>
+
+<header class="band"><div class="wrap narrow">
+  <p class="eyebrow">Your plan</p>
+  <h1>Manage or cancel</h1>
+  <p id="lead">Cancel your plan or an add-on in a minute. No call, no email back and forth. You keep everything already delivered.</p>
+</div></header>
+
+<section><div class="wrap narrow">
+  <div class="card">
+    <div id="ask">
+      <h2>Email on your plan</h2>
+      <p class="small">Use the email you checked out with on Whop. We'll send you a 6-digit code. No password needed.</p>
+      <form id="f" novalidate><label for="email">Email</label><input id="email" type="email" autocomplete="email" required>
+        <button class="btn dark" type="submit">Email me a code</button></form>
+    </div>
+    <div id="sent" hidden>
+      <h2>Check your inbox</h2>
+      <p class="small">If that email has a LoanSocial plan, we've sent a 6-digit code from hello@getloansocial.com. It works for 15 minutes.</p>
+      <form id="cf" novalidate><label for="code">Code</label><input id="code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" required>
+        <button class="btn dark" type="submit">Continue</button></form>
+      <p class="small" style="margin-top:14px"><a href="cancel.html">Use a different email</a></p>
+    </div>
+    <div id="manage" hidden>
+      <h2>Your plan</h2>
+      <p class="small" id="whoami" style="margin-bottom:14px"></p>
+      <div id="list"></div>
+      <div id="whybox"><label for="why">Mind telling us why? <span class="opt">(optional)</span></label>
+        <select id="why"><option value="">Choose one</option><option>Too expensive</option><option>Not posting enough to need it</option><option>Posts weren't right for my market</option><option>Compliance wouldn't approve them</option><option>Doing it in-house or with another service</option><option>Left the industry or changed roles</option><option>Other</option></select></div>
+      <button class="btn dark" id="go" type="button">Cancel selected at end of billing period</button>
+      <p class="small" style="margin-top:14px">Cancelling stops the next renewal. You keep access and every post already delivered until the date shown. Cancelling your main plan also cancels its add-ons. Cancel during the Create free trial and you are never charged. Asking for a Branded AI refund? See the <a href="refund.html">refund policy</a> and email hello@getloansocial.com.</p>
+      <p class="msg" id="msg" role="status"></p>
+    </div>
+    <div id="bad" hidden><h2>Your session has expired</h2><p class="small"><a href="cancel.html">Start again</a>; it takes a minute.</p></div>
+  </div>
+  <p class="small" style="margin-top:18px">Questions? Email <a href="mailto:hello@getloansocial.com">hello@getloansocial.com</a>.</p>
+</div></section>
+
+<footer><div class="wrap"><p>LoanSocial is a marketing content service. It is not a lender and does not give legal or compliance advice.</p><p style="margin-top:8px"><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="refund.html">Refunds</a> · <a href="cancel.html">Cancel anytime</a></p></div></footer>
+
+<script>
+var API='https://api.getloansocial.com',S='',EM='',DEMO=new URLSearchParams(location.search).has('demo');
+function $(i){return document.getElementById(i)}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function post(p,d){return fetch(API+p,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)}).then(function(r){return r.json()})}
+function day(s){if(!s)return '';var d=new Date(typeof s==='number'?s*1000:s);return isNaN(d)?'':d.toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'})}
+function fail(t){$('msg').textContent=t||'Something went wrong. Please email hello@getloansocial.com.';$('msg').className='msg err'}
+function show(ms){$('ask').hidden=true;$('sent').hidden=true;$('manage').hidden=false;$('whoami').textContent=EM;$('msg').textContent='';
+  if(!ms.length){$('list').innerHTML='<p>There is no active LoanSocial plan on this email. Checked out with a different email? <a href="cancel.html">Try that one</a>.</p>';$('go').hidden=true;$('whybox').hidden=true;return}
+  $('list').innerHTML=ms.map(function(m){var end=day(m.ends);
+    return m.cancelling?'<div class="plan off"><span><b>'+esc(m.name)+'</b><small>Cancelled. Ends '+esc(end||'at the end of this billing period')+'</small></span><button class="btn line" data-undo="'+esc(m.id)+'">Keep it</button></div>'
+      :'<label class="plan"><input type="checkbox" value="'+esc(m.id)+'" data-core="'+(m.core?1:0)+'"><span><b>'+esc(m.name)+'</b><small>'+(m.trial?'Free trial'+(end?', first charge '+esc(end):''):(end?'Renews '+esc(end):'Active'))+'</small></span><em>$'+esc(m.price)+'/'+esc(m.per||'mo')+'</em></label>'}).join('');
+  var live=ms.some(function(m){return !m.cancelling});$('go').hidden=!live;$('whybox').hidden=!live;
+  [].forEach.call(document.querySelectorAll('[data-core="1"]'),function(c){c.addEventListener('change',function(){
+    var cores=document.querySelectorAll('[data-core="1"]'),all=[].every.call(cores,function(x){return x.checked});
+    if(all)[].forEach.call(document.querySelectorAll('.plan input'),function(x){x.checked=true})})});
+  [].forEach.call(document.querySelectorAll('[data-undo]'),function(b){b.addEventListener('click',function(){b.disabled=true;
+    if(DEMO){$('msg').textContent='Demo mode: nothing was changed.';$('msg').className='msg';b.disabled=false;return}
+    post('/cancel/do',{s:S,mode:'undo',ids:[b.getAttribute('data-undo')]}).then(function(j){if(!j.ok)throw 0;show(j.memberships);$('msg').textContent='Done. It will renew as normal.';$('msg').className='msg ok'}).catch(function(){b.disabled=false;fail()})})})}
+function load(){$('lead').textContent='Loading your plan…';
+  post('/cancel/list',{s:S}).then(function(j){if(!j.ok){$('sent').hidden=true;$('bad').hidden=false;return}
+    $('lead').textContent='Cancel your plan or an add-on. You keep everything already delivered.';show(j.memberships)})
+   .catch(function(){$('lead').textContent='Something went wrong. Please refresh, or email hello@getloansocial.com.'})}
+$('f').addEventListener('submit',function(e){e.preventDefault();var v=$('email').value.trim();if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){$('email').focus();return}
+  var b=e.target.querySelector('button');b.disabled=true;b.textContent='Sending…';EM=v.toLowerCase();
+  post('/cancel/start',{email:v}).then(function(){$('ask').hidden=true;$('sent').hidden=false;$('code').focus()})
+   .catch(function(){b.disabled=false;b.textContent='Email me a code';alert('Something went wrong. Please try again.')})});
+$('cf').addEventListener('submit',function(e){e.preventDefault();var b=e.target.querySelector('button');b.disabled=true;b.textContent='Checking…';
+  post('/cancel/verify',{email:EM,code:$('code').value}).then(function(j){b.disabled=false;b.textContent='Continue';
+    if(!j.ok){alert('That code is wrong or has expired. Check the latest email, or start again.');return}S=j.s;load()})
+   .catch(function(){b.disabled=false;b.textContent='Continue';alert('Something went wrong. Please try again.')})});
+$('go').addEventListener('click',function(){var ids=[].map.call(document.querySelectorAll('.plan input:checked'),function(c){return c.value});
+  if(!ids.length){fail('Tick what you want to cancel.');return}
+  if(DEMO){$('msg').textContent='Demo mode: nothing was cancelled.';$('msg').className='msg';return}
+  if(!confirm('Cancel at the end of your billing period? You keep access until then.'))return;
+  var b=$('go');b.disabled=true;b.textContent='Cancelling…';
+  post('/cancel/do',{s:S,mode:'cancel',ids:ids,reason:$('why').value}).then(function(j){if(!j.ok)throw 0;b.disabled=false;b.textContent='Cancel selected at end of billing period';show(j.memberships);
+    $('msg').textContent='Cancelled. You won\'t be billed again for what you cancelled. Changed your mind? Press Keep it.';$('msg').className='msg ok'})
+   .catch(function(){b.disabled=false;b.textContent='Cancel selected at end of billing period';fail()})});
+if(DEMO){EM='maya@example.com';show([
+  {id:'mem_demo1',name:'LoanSocial Branded AI monthly',core:true,price:79,per:'mo',cancelling:false,ends:'2026-12-03'},
+  {id:'mem_demo2',name:'LoanSocial Realtor co-branded pack',core:false,price:29,per:'mo',cancelling:false,ends:'2026-12-03'},
+  {id:'mem_demo3',name:'LoanSocial Past-client newsletter',core:false,price:29,per:'mo',cancelling:true,ends:'2026-12-03'}])}
+</script>
+</body>
+</html>

@@ -54,7 +54,7 @@ ul.ticks li:before{content:"";position:absolute;left:4px;top:15px;width:10px;hei
   </div>
 </div></section>
 
-<footer><div class="wrap"><p>LoanSocial is a marketing content service. It is not a lender and does not give legal or compliance advice. Sample brand: a made-up loan officer with placeholder NMLS numbers.</p></div></footer>
+<footer><div class="wrap"><p>LoanSocial is a marketing content service. It is not a lender and does not give legal or compliance advice. Sample brand: a made-up loan officer with placeholder NMLS numbers.</p><p style="margin-top:8px"><a href="privacy.html" style="color:rgba(250,242,233,.85)">Privacy</a> · <a href="terms.html" style="color:rgba(250,242,233,.85)">Terms</a> · <a href="refund.html" style="color:rgba(250,242,233,.85)">Refunds</a> · <a href="cancel.html" style="color:rgba(250,242,233,.85)">Cancel anytime</a></p></div></footer>
 <script>
 fetch('https://api.getloansocial.com/branded/offers').then(function(r){return r.json()}).then(function(o){
   if(o.upgrade)document.getElementById('go').href=o.upgrade;
