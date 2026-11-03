@@ -40,7 +40,7 @@
     '.lsco-add{display:flex;gap:12px;align-items:flex-start;border:1px solid #e7dccb;border-radius:14px;padding:12px 14px;cursor:pointer;transition:border-color .15s,background .15s}'+
     '.lsco-add[hidden]{display:none}.lsco-add:has(input:checked){border-color:#0e1b33;background:#f7f8fb}.lsco-add input{margin-top:3px;width:18px;height:18px;accent-color:#0e1b33;flex:none}'+
     '.lsco-add span{display:grid;gap:2px;font-size:14px}.lsco-add small{color:#5d6678;font-size:13px}.lsco-add em{font-style:normal;color:#0e1b33;font-weight:600;margin-left:auto;white-space:nowrap;font-size:14px}'+
-    '.lsco-tot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-top:1px solid #e7dccb;padding-top:12px;font-size:14px}.lsco-tot b{font-size:20px;color:#0e1b33}.lsco-tot small{display:block;color:#5d6678;font-size:12px;text-align:right}'+
+    '.lsco-bar{position:sticky;bottom:-18px;margin:0 -18px -18px;padding:0 18px 18px;background:#fff;display:grid;gap:12px;box-shadow:0 -14px 18px -12px rgba(0,0,0,.12);z-index:1}.lsco-tot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-top:1px solid #e7dccb;padding-top:12px;font-size:14px}.lsco-tot b{font-size:20px;color:#0e1b33}.lsco-tot small{display:block;color:#5d6678;font-size:12px;text-align:right}'+
     '.lsco-go{background:#0e1b33;color:#fff;border:0;border-radius:999px;padding:15px 18px;font:600 16px Inter,system-ui,sans-serif;cursor:pointer;width:100%}'+
     '.lsco-back{background:none;border:0;color:#b07a2a;font:500 14px Inter,system-ui,sans-serif;cursor:pointer;justify-self:start;padding:0}.lsco-back[hidden]{display:none}'+
     '.lsco-step{display:grid;gap:12px}.lsco-step[hidden]{display:none}'+
@@ -53,9 +53,9 @@
   co.innerHTML='<div class="lsco-box"><div class="lsco-top"><b id="lsco-t">Your plan</b><button class="lsco-x" type="button" aria-label="Close checkout">×</button></div>'+
     '<div class="lsco-step" id="lsco-s1"><div class="lsco-plan"><h4 id="lsco-pn"></h4><p class="lsco-deal" id="lsco-deal"></p><p id="lsco-pl"></p></div>'+
       '<p class="lsco-h">Add more, if you want it</p>'+adds+
-      '<div class="lsco-tot"><span>Today</span><span><b id="lsco-today"></b><small id="lsco-then"></small></span></div>'+
+      '<div class="lsco-bar"><div class="lsco-tot"><span>Today</span><span><b id="lsco-today"></b><small id="lsco-then"></small></span></div>'+
       '<button class="lsco-go" id="lsco-go" type="button">Continue to payment</button>'+
-      '<p class="lsco-foot" id="lsco-f1">Secure checkout by Whop · Cancel anytime</p></div>'+
+      '<p class="lsco-foot" id="lsco-f1">Secure checkout by Whop · Cancel anytime</p></div></div>'+
     '<div class="lsco-step" id="lsco-s2" hidden><button class="lsco-back" id="lsco-back" type="button">← Change add-ons</button>'+
       '<p class="lsco-wait" id="lsco-wait">Loading secure checkout…</p><div id="lsco-mount"></div>'+
       '<p class="lsco-foot" id="lsco-foot">Secure checkout by Whop · Cancel anytime</p></div></div>';
