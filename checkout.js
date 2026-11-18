@@ -6,13 +6,13 @@
      so the worker sees each add-on as its own membership. The Profile kit rides on the plan's "+ Profile kit"
      bundle plan (as the pricing bump always did), so the worker records it with the plan itself.
    Team and add-on links (pricing add-on cards, my.html) skip step 1 and go straight to payment, as before.
-   ?buy=1 (DM / prospect sample pages): opens on Branded AI monthly with FIRSTMONTH37, $37 the first month
+   ?buy=1 (DM / prospect sample pages): opens on Branded AI monthly with FIRSTMONTH9, $9 the first month (18 Nov 2026; was FIRSTMONTH37)
      then $79/month. utm_content rides along to the return URL and the welcome page.
    If Elements fails to load or draw within 12 s, the buyer goes to Whop's hosted checkout for the core
    plan (nothing is lost). Purchase/StartTrial fire in the browser with eventID = the Whop payment id. */
 (function(){
   var q0=new URLSearchParams(location.search);
-  var PROMO_CODE='FIRSTMONTH37',PROMO_OFF=42,PROMO_PLAN='plan_yXm9cH7nG8c97',UTM=q0.get('utm_content')||'';
+  var PROMO_CODE='FIRSTMONTH9',PROMO_OFF=70,PROMO_PLAN='plan_yXm9cH7nG8c97',UTM=q0.get('utm_content')||'';
   var CORE={ /* plan ids: branded/plan_map.json */
     plan_DacZTAzCU8mz7:{tier:'create',iv:'month',v:37,trial:true,name:'Create monthly'},
     plan_MexNpYQp44EKR:{tier:'create',iv:'year',v:370,name:'Create yearly'},
@@ -125,7 +125,7 @@
     boxes.forEach(function(b){var a=ADDONS.filter(function(x){return x.k===b.value})[0];b.closest('label').hidden=!fit(a);b.checked=fit(a)&&pre.indexOf(b.value)>=0});
     if(cur.core){var c=cur.core;
       $('lsco-pn').textContent='LoanSocial '+(c.tier==='branded'?'Branded AI':'Create')+(c.iv==='year'?' (yearly)':'');
-      $('lsco-deal').textContent=cur.promo?'First month $37, then $79/month, cancel anytime':c.trial?'7 days free, then $37/month, cancel anytime':c.iv==='year'?'$'+c.v+' a year: two months free':'$'+c.v+'/month, cancel anytime';
+      $('lsco-deal').textContent=cur.promo?'First month $9, then $79/month, cancel anytime':c.trial?'7 days free, then $37/month, cancel anytime':c.iv==='year'?'$'+c.v+' a year: two months free':'$'+c.v+'/month, cancel anytime';
       $('lsco-pl').textContent=PLANLINE[c.tier];
       $('lsco-f1').textContent=c.tier==='branded'?'Secure checkout by Whop · Full refund within 7 days if you haven’t started your first month':
         c.trial?'Secure checkout by Whop · $0 today for Create · Cancel anytime':'Secure checkout by Whop · Cancel anytime';
